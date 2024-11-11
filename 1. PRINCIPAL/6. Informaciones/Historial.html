@@ -1,5 +1,35 @@
 <!-- PHP PARA INSERTAR LOS REPORTES DE CADA USUARIO -->
 
+<?php
+// Conexión a la base de datos
+$servername = "db.inf.uct.cl";
+$username = "ylisana";
+$password = "WJn4R3xmVPN95t+N9";
+$dbname = "A2024_ylisana";
+
+// Crear la conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Consulta para contar el número de reportes
+$sql = "SELECT COUNT(*) AS total_reportes FROM reportes";
+$result = $conn->query($sql);
+
+// Verificar si hay resultados
+$total_reportes = 0;
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $total_reportes = $row['total_reportes'];
+}
+
+// Cerrar la conexión
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,7 +40,6 @@
     <title>Historial de Emergencias - Luz Alerta</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
@@ -29,7 +58,8 @@
                             <a class="nav-link" href="../2. Inicios/">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/1. PRINCIPAL/6. Informaciones/QuieneSomos.html">¿Quiénes somos?</a>
+                            <a class="nav-link" href="/1. PRINCIPAL/6. Informaciones/QuieneSomos.html">¿Quiénes
+                                somos?</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">Contacto</a>
@@ -42,6 +72,13 @@
 
     <main class="container mt-5">
         <section>
+            <h3>Total de Reportes Registrados</h3>
+            <p>Actualmente hay un total de <strong>
+                    <?php echo $total_reportes; ?>
+                </strong> reportes registrados.</p>
+        </section>
+
+        <section class="mt-4">
             <h3>Últimas 5 Emergencias Registradas</h3>
             <input type="text" id="searchInput" class="form-control" placeholder="Buscar emergencia..."
                 onkeyup="filterEmergencies()">
@@ -57,8 +94,6 @@
         <section class="mt-4">
             <h3>Estadísticas de Emergencias</h3>
             <p>A continuación, puedes ver un gráfico con la cantidad de emergencias por sector en el último mes:</p>
-
-            <!-- Aquí irá el gráfico de barras -->
             <canvas id="emergencyChart" width="400" height="200"></canvas>
 
             <script>
