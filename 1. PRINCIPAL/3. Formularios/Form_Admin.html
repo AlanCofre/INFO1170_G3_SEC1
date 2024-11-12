@@ -75,7 +75,22 @@
                         value="123456">
                 </div>
 
-                <!-- AQUI VAN LOS DATOS DEL CLIENTE QUE SE TRASPASARAN AUTOMATICAMNETE-->
+        <!-- AQUI VAN LOS DATOS DEL CLIENTE QUE SE TRASPASARAN AUTOMATICAMNETE-->
+        <form id="form-admin" action="guardar_admin.php" method="post">
+            <!-- Campos del cliente (solo lectura) -->
+            <label for="tipo_problema">Tipo de Problema:</label>
+            <input type="text" id="tipo_problema" name="tipo_problema" class="form-control" value="<?php echo $tipo_problema; ?>" readonly>
+        
+            <label for="descripcion_cliente">Descripción del Cliente:</label>
+            <textarea id="descripcion_cliente" name="descripcion_cliente" class="form-control" readonly><?php echo $descripcion_cliente; ?></textarea>
+        
+            <label for="fecha_reporte">Fecha y Hora del Reporte:</label>
+            <input type="datetime-local" id="fecha_reporte" name="fecha_reporte" class="form-control" value="<?php echo $fecha_reporte; ?>" readonly>
+        
+            <label for="ubicacion_problema">Ubicación del Problema:</label>
+            <input type="text" id="ubicacion_problema" name="ubicacion_problema" class="form-control" value="<?php echo $ubicacion_problema; ?>" readonly>
+        </form>
+                
 
             </fieldset>
 

@@ -1,4 +1,39 @@
 <!-- ESTE FORMULARIO LE APARECERA AL TECNICO CUANDO YA HAYA TERMINADO EL TRABAJO,
     LE APARECERA COMPLETADO LOS CAMPOS QUE LLENARON EL CLIENTE Y ADMIN,
     EL SOLO COLOCARA SU DESCRIPCION FINAL Y EL TIEMPO QUE LE TOMÓ (HORA TERMINO)
-    AL FINAL IRÁ EL BOTON DE ENVIAR, LO RECIBIRALA BANDEJA DE ADMIN Y -->
+    AL FINAL IRÁ EL BOTON DE ENVIAR, LO RECIBIRALA BANDEJA DE ADMIN -->
+
+    
+    <!-- Este es el formulario completado por el cliente y el admin, falta los campos del tecnico -->
+    <form id="form-tecnico" action="guardar_tecnico.php" method="post">
+        <!-- Campos del cliente (solo lectura) -->
+        <fieldset class="border p-4 mb-4">
+            <legend class="w-auto">Información del Cliente</legend>
+    
+            <label for="tipo_problema">Tipo de Problema:</label>
+            <input type="text" id="tipo_problema" name="tipo_problema" class="form-control" value="<?php echo $tipo_problema; ?>" readonly>
+    
+            <label for="descripcion_cliente">Descripción del Cliente:</label>
+            <textarea id="descripcion_cliente" name="descripcion_cliente" class="form-control" readonly><?php echo $descripcion_cliente; ?></textarea>
+    
+            <label for="fecha_reporte">Fecha y Hora del Reporte:</label>
+            <input type="datetime-local" id="fecha_reporte" name="fecha_reporte" class="form-control" value="<?php echo $fecha_reporte; ?>" readonly>
+    
+            <label for="ubicacion_problema">Ubicación del Problema:</label>
+            <input type="text" id="ubicacion_problema" name="ubicacion_problema" class="form-control" value="<?php echo $ubicacion_problema; ?>" readonly>
+        </fieldset>
+    
+        <!-- Campos del administrador (solo lectura) -->
+        <fieldset class="border p-4 mb-4">
+            <legend class="w-auto">Información del Administrador</legend>
+    
+            <label for="descripcion_admin">Descripción Actual por el Administrador:</label>
+            <textarea id="descripcion_admin" name="descripcion_admin" class="form-control" readonly><?php echo $descripcion_admin; ?></textarea>
+    
+            <label for="tiempo_estimado">Tiempo Estimado para Solución:</label>
+            <input type="number" id="tiempo_estimado" name="tiempo_estimado" class="form-control" value="<?php echo $tiempo_estimado; ?>" readonly>
+        </fieldset>
+    
+        <!-- Agrega los campos del técnico aquí -->
+    </form>
+    
