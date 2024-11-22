@@ -22,20 +22,3 @@ try {
     die("Error de conexión: " . $e->getMessage());
 }
 ?>
-
-//----------------------------------- EJEMPLO PARA HACER LA CONEXION ------------------------------------------
-
-<?php
-// Incluir la configuración de la base de datos
-require_once 'Conex.php';
-
-// Aquí puedes usar $pdo para realizar consultas a la base de datos
-// Ejemplo de consulta:
-$query = $pdo->query("SELECT * FROM usuarios");
-$usuarios = $query->fetchAll(PDO::FETCH_ASSOC);
-
-// Mostrar los resultados
-foreach ($usuarios as $usuario) {
-    echo $usuario['nombre'] . ' - ' . $usuario['email'] . '<br>';
-}
-?>

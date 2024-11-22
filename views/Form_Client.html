@@ -21,7 +21,7 @@
 
     <main class="container mt-5">
         <h1 class="text-center">Formulario de Reporte de Incidencias</h1>
-        <form id="form-reporte" action="../../models/guardar_cliente.php" method="post" enctype="multipart/form-data">
+        <form id="form-reporte" action="../models/guardar_cliente.php" method="post" enctype="multipart/form-data">
             <fieldset class="border p-4 mb-4">
                 <legend class="w-auto">Descripción</legend>
                 <div class="form-group">
@@ -62,9 +62,7 @@
             </fieldset>
 
             <!-- Botón con enlace que redirige directamente usando ruta relativa -->
-            <a href="../5. Updates/update_cliente.html" class="btn btn-primary">
-                Enviar Reporte
-            </a>
+            <button type="submit" class="btn btn-primary">Enviar Reporte</button>
         </form>
     </main>
 
@@ -72,6 +70,7 @@
         <p>© 2024 Luz Alerta. Todos los derechos reservados.</p>
     </footer>
 
+    <script src="../assets/guardar_cliente.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

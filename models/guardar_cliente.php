@@ -1,41 +1,38 @@
 <?php
-// Incluir el archivo de conexión
 include '../Conex.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener datos del formulario
-    $id_cliente = 1; // Supongamos que tienes un ID de cliente (puedes cambiar esto por el ID real del cliente)
-    $tipo_problema = $_POST['tipo_problema'];
-    $descripcion_cliente = $_POST['descripcion_cliente'];
-    $fecha_reporte = $_POST['fecha_reporte'];
-    $ubicacion_problema = $_POST['ubicacion_problema'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $tipo_problema = htmlspecialchars($_POST['tipo_problema']);
+    $descripcion_cliente = htmlspecialchars($_POST['descripcion_detallada']);
+    $fecha_reporte = htmlspecialchars($_POST['fecha_hora_inicio']);
+    $ubicacion_problema = htmlspecialchars($_POST['direccion']);
+    $imagen = null;
 
-    // Manejo de la subida de la imagen
-    $imagen = '';
-    if (!empty($_FILES['imagen']['name'])) {
-        $imagen = basename($_FILES['imagen']['name']);
+    if (!empty($_FILES['imagenes_videos']['name'][0])) {
         $target_dir = "uploads/";
-        $target_file = $target_dir . $imagen;
-
-        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
-            echo "El archivo se ha subido correctamente.";
-        } else {
-            echo "Hubo un error al subir el archivo.";
-        }
+        $imagen = $target_dir . basename($_FILES['imagenes_videos']['name'][0]);
+        move_uploaded_file($_FILES['imagenes_videos']['tmp_name'][0], $imagen);
     }
 
-    // Insertar datos en la base de datos
-    $sql = "INSERT INTO Reporte (id_cliente, tipo_problema, descripcion_cliente, fecha_reporte, ubicacion_problema, imagen)
-            VALUES ('$id_cliente', '$tipo_problema', '$descripcion_cliente', '$fecha_reporte', '$ubicacion_problema', '$imagen')";
+    $sql = "INSERT INTO reporte (tipo_problema, descripcion_cliente, fecha_reporte, ubicacion_problema, imagen)
+            VALUES (?, ?, ?, ?, ?)";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Datos guardados correctamente.";
-        header("Location: ../5. Updates/update_cliente.html"); // Redirigir después de guardar
-        exit();
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("sssss", $tipo_problema, $descripcion_cliente, $fecha_reporte, $ubicacion_problema, $imagen);
+
+        if ($stmt->execute()) {
+            echo "Reporte guardado con éxito.";
+        } else {
+            echo "Error al guardar el reporte: " . $stmt->error;
+        }
+
+        $stmt->close();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error en la preparación de la consulta: " . $conn->error;
     }
 
     $conn->close();
+} else {
+    echo "Método de solicitud no permitido.";
 }
 ?>
