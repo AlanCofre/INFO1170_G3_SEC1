@@ -57,6 +57,11 @@
             margin-top: 10px;
             text-align: center;
         }
+
+        .load-workers-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -129,6 +134,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="load-workers-btn">
+                        <button class="btn btn-primary" id="load-workers-btn">Cargar Trabajadores</button>
+                    </div>
                 </div>
             </section>
         </div>
@@ -184,8 +192,8 @@
             }
         };
 
-        // Llamar a la función para cargar los datos al cargar la página
-        document.addEventListener('DOMContentLoaded', loadWorkers);
+        // Asociar la función al botón de cargar trabajadores
+        document.getElementById('load-workers-btn').addEventListener('click', loadWorkers);
     </script>
 </body>
 
