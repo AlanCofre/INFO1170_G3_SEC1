@@ -109,6 +109,28 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Tabla de trabajadores -->
+            <section class="row justify-content-center mt-4">
+                <div class="col-md-10">
+                    <h3 class="text-center">Trabajadores Disponibles</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered mt-3">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Puesto</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="workers-list">
+                                <!-- Los datos de los trabajadores se cargarán aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
@@ -132,6 +154,39 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const loadWorkers = async () => {
+            try {
+                const response = await fetch('getTrabajadores.php'); // Llamada al endpoint PHP
+                const workers = await response.json();
+
+                if (workers.error) {
+                    console.error('Error en la API:', workers.error);
+                    return;
+                }
+
+                const tableBody = document.getElementById('workers-list');
+                tableBody.innerHTML = ''; // Limpia la tabla antes de cargar los datos
+
+                workers.forEach(worker => {
+                    const row = `
+                        <tr>
+                            <td>${worker.id}</td>
+                            <td>${worker.nombre}</td>
+                            <td>${worker.puesto}</td>
+                            <td>${worker.estado}</td>
+                        </tr>
+                    `;
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                });
+            } catch (error) {
+                console.error('Error al cargar los trabajadores:', error);
+            }
+        };
+
+        // Llamar a la función para cargar los datos al cargar la página
+        document.addEventListener('DOMContentLoaded', loadWorkers);
+    </script>
 </body>
 
 </html>
