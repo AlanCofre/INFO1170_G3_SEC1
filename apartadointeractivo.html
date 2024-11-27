@@ -241,5 +241,84 @@
       };
     }
   </script>
+  <!-- Footer -->
+<footer class="bg-dark text-white py-3 mt-auto">
+  <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <p class="mb-2 mb-md-0">&copy; 2024 LuzAlerta_. Todos los derechos reservados.</p>
+
+          <!-- Iconos de Redes Sociales -->
+          <div>
+              <a href="https://facebook.com" target="_blank" class="text-white mx-2"><i class="fab fa-facebook fa-lg"></i></a>
+              <a href="https://twitter.com" target="_blank" class="text-white mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+              <a href="https://instagram.com" target="_blank" class="text-white mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+          </div>
+
+          <!-- Botón para abrir el modal -->
+          <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalReglamento">
+              Reglamento y Modo de Uso
+          </button>
+      </div>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="modalReglamento" tabindex="-1" aria-labelledby="modalReglamentoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalReglamentoLabel">Reglamento y Modo de Uso</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Contenido Original -->
+              <div class="container">
+                  <h1>Reglamento y Modo de Uso</h1>
+
+                  <div class="section">
+                      <h2>1. Normas generales</h2>
+                      <p>- Todos los usuarios deben registrarse con información verídica y actualizada.</p>
+                      <p>- El acceso a la aplicación está limitado a usuarios debidamente autorizados.</p>
+                      <p>- Se debe respetar la confidencialidad de las credenciales de acceso.</p>
+                      <p>- Está prohibido compartir contraseñas o cuentas con terceros.</p>
+                      <p>- Los usuarios deben utilizar la aplicación únicamente para los fines previstos (por ejemplo, reportar fallos, consultar facturas, solicitar servicios técnicos).</p>
+                      <p>- Está prohibido utilizar la plataforma para actividades fraudulentas o ilegales.</p>
+                  </div>
+
+                  <div class="section">
+                      <h2>2. Modo de Uso</h2>
+                      <p>- En caso de tener una cuenta debes loguearte; caso contrario deberás registrarte para poder acceder.</p>
+                      <p>- Acto seguido verás una vista con un formulario y un mapa. Deberás rellenar el formulario de emergencia para informar a la empresa.</p>
+                      <p>- Luego de informar podrás ver una pantalla de actualización en la que se verá tu ubicación marcada en el mapa.</p>
+                      <p>- Al finalizar la emergencia se te notificará, y podrás salir de la aplicación habiendo colaborado con la reparación del suministro eléctrico.</p>
+                  </div>
+
+                  <div class="section">
+                      <h2>3. Política de Emergencias</h2>
+                      <p>Se considera emergencia cualquier situación que afecte o amenace la seguridad de las personas, propiedades, infraestructura eléctrica, o el medio ambiente. Ejemplos incluyen:</p>
+                      <ul>
+                          <li>Corte eléctrico total o parcial en áreas residenciales, comerciales o industriales.</li>
+                          <li>Riesgo de electrocución por cables caídos o expuestos.</li>
+                          <li>Sobrecalentamiento de transformadores o estaciones de servicio.</li>
+                          <li>Incendios asociados a la red eléctrica.</li>
+                          <li>Fallas críticas en hospitales, estaciones de policía, bomberos, u otras instalaciones vitales.</li>
+                      </ul>
+                  </div>
+
+                  <div class="text-center mt-3">
+                      <button class="btn btn-primary" data-bs-dismiss="modal">He leído y acepto</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Scripts de Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
 </body>
 </html>
