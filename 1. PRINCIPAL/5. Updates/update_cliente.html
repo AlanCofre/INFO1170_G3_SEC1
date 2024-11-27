@@ -1,16 +1,3 @@
-<!-- AQUI EL CLIENTE SOLO OBSERVA Y JUEGA UNA VEZ ENVIA EL REPORTE
-    HABRA UNA FUNCION PARA CAMBIAR LAS FASES
-    FASES:
-        + ESPERANDO VALIDACION (UNA VEZ ENVIADO EL FORM. Y ES RECIBIDO POR EL ADMIN)
-        + VALIDACION ACEPTADA (UNA VEZ EL ADMIN HAYA ELEGIDO EL TECNICO Y ENVIARSELO)
-        + TECNICO EN CAMINO (UNA VEZ EL TECNICO PRESIONA EL BOTON DE ACEPTAR REPORTE)
-        + TRABAJO EN PROCESO (UNA VEZ EL TEC. PRECIONE EL BOTON DE INICIAR TRABAJO (OPCIONES QUE TENDRA EL TEC. EN SU UPDATE))
-        + TRABAJO TERMINADO (UNA VEZ EL TEC. PRESIONE EL BOTON DE FINALIZAR TRABAJO)
-    (CUENDO EL TECNICO HAYA TERMINADO EL TRABAJO SE LE ENVIARA A SU FORMULARIO)  
-
-    ELIMINAR NAV Y FOOTER PARA UTILIZAR PLANTILLA
-        -->
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,15 +11,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Leaflet CSS para el mapa -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <!-- Tu archivo CSS personalizado -->
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
 
     <style>
-        /* Estilos adicionales para la vista de confirmación */
         .status-section {
             background-color: #1c3d6e;
             padding: 20px;
@@ -43,23 +26,24 @@
         }
 
         #map {
-            height: 400px;
+            height: 600px;
             width: 100%;
             border-radius: 10px;
         }
 
-        h1, h2 {
-            color: #343a40;
+        .chart-popup {
+            width: 300px;
+            height: 300px;
         }
 
-        .status-section h2 {
-            color: white;
+        .chart-container {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 
 <body>
-    <!-- NAVBAR -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
@@ -84,138 +68,98 @@
         </nav>
     </header>
 
-    <!-- Contenido Principal -->
     <div class="container my-4">
         <section class="text-center mb-4">
             <h1>Confirmación de Reporte</h1>
             <p>Su reporte ha sido recibido exitosamente. A continuación puede ver los detalles de su solicitud.</p>
         </section>
 
-        <!-- Sección de estado -->
         <div class="status-section">
             <h2>Estado de la solicitud:</h2>
             <p>Trabajador asignado al reporte</p>
             <p>Tiempo estimado para la llegada: 45 min</p>
         </div>
 
-        <!-- Mapa dinámico de la zona del reporte -->
+        <!-- Mapa dinámico -->
         <div id="map"></div>
     </div>
 
-    <!-- Pie de Página -->
-  <!-- Footer -->
-<footer class="bg-dark text-white py-3 mt-auto">
-    <div class="container">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <p class="mb-2 mb-md-0">&copy; 2024 LuzAlerta_. Todos los derechos reservados.</p>
-
-            <!-- Iconos de Redes Sociales -->
-            <div>
-                <a href="https://facebook.com" target="_blank" class="text-white mx-2"><i class="fab fa-facebook fa-lg"></i></a>
-                <a href="https://twitter.com" target="_blank" class="text-white mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                <a href="https://instagram.com" target="_blank" class="text-white mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-            </div>
-
-            <!-- Botón para abrir el modal -->
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalReglamento">
-                Reglamento y Modo de Uso
-            </button>
-        </div>
-    </div>
-</footer>
-
-<!-- Modal -->
-<div class="modal fade" id="modalReglamento" tabindex="-1" aria-labelledby="modalReglamentoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalReglamentoLabel">Reglamento y Modo de Uso</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Contenido Original -->
-                <div class="container">
-                    <h1>Reglamento y Modo de Uso</h1>
-
-                    <div class="section">
-                        <h2>1. Normas generales</h2>
-                        <p>- Todos los usuarios deben registrarse con información verídica y actualizada.</p>
-                        <p>- El acceso a la aplicación está limitado a usuarios debidamente autorizados.</p>
-                        <p>- Se debe respetar la confidencialidad de las credenciales de acceso.</p>
-                        <p>- Está prohibido compartir contraseñas o cuentas con terceros.</p>
-                        <p>- Los usuarios deben utilizar la aplicación únicamente para los fines previstos (por ejemplo, reportar fallos, consultar facturas, solicitar servicios técnicos).</p>
-                        <p>- Está prohibido utilizar la plataforma para actividades fraudulentas o ilegales.</p>
-                    </div>
-
-                    <div class="section">
-                        <h2>2. Modo de Uso</h2>
-                        <p>- En caso de tener una cuenta debes loguearte; caso contrario deberás registrarte para poder acceder.</p>
-                        <p>- Acto seguido verás una vista con un formulario y un mapa. Deberás rellenar el formulario de emergencia para informar a la empresa.</p>
-                        <p>- Luego de informar podrás ver una pantalla de actualización en la que se verá tu ubicación marcada en el mapa.</p>
-                        <p>- Al finalizar la emergencia se te notificará, y podrás salir de la aplicación habiendo colaborado con la reparación del suministro eléctrico.</p>
-                    </div>
-
-                    <div class="section">
-                        <h2>3. Política de Emergencias</h2>
-                        <p>Se considera emergencia cualquier situación que afecte o amenace la seguridad de las personas, propiedades, infraestructura eléctrica, o el medio ambiente. Ejemplos incluyen:</p>
-                        <ul>
-                            <li>Corte eléctrico total o parcial en áreas residenciales, comerciales o industriales.</li>
-                            <li>Riesgo de electrocución por cables caídos o expuestos.</li>
-                            <li>Sobrecalentamiento de transformadores o estaciones de servicio.</li>
-                            <li>Incendios asociados a la red eléctrica.</li>
-                            <li>Fallas críticas en hospitales, estaciones de policía, bomberos, u otras instalaciones vitales.</li>
-                        </ul>
-                    </div>
-
-                    <div class="text-center mt-3">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">He leído y acepto</button>
-                    </div>
-                </div>
+    <footer class="bg-dark text-white py-3 mt-auto">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="mb-2 mb-md-0">&copy; 2024 LuzAlerta_. Todos los derechos reservados.</p>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Scripts de Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
-
+    </footer>
 
     <!-- Scripts de Bootstrap y Leaflet -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script>
-        // Inicializar el mapa en la ubicación del reporte
-        var map = L.map('map').setView([-38.7359, -72.5904], 13); // Coordenadas de Temuco o la ubicación del reporte
+        // Inicializa el mapa centrado en Temuco
+        const map = L.map('map').setView([-38.73965, -72.59842], 12);
 
-        // Añadir mapa base desde OpenStreetMap
+        // Agrega la capa base de OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Coordenadas del reporte
-        var reportLocation = [-38.7359, -72.5904]; // Ajusta las coordenadas según la ubicación real del reporte
+        // Carga las zonas de prioridad desde un archivo GeoJSON
+        fetch('Prioridades.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: feature => ({
+                        color: feature.properties.prioridad === 'alta' ? 'red' :
+                            feature.properties.prioridad === 'media' ? 'orange' : 'green'
+                    })
+                }).addTo(map);
+            });
 
-        // Agregar marcador del reporte
-        var reportMarker = L.marker(reportLocation).addTo(map).bindPopup('Ubicación del reporte').openPopup();
+        // Datos de gráficos para íconos
+        const chartData = {
+            'AvAlemania': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [55, 10, 15, 20] }
+        };
 
-        // Agregar círculo alrededor del marcador que representa la zona afectada
-        var reportCircle = L.circle(reportLocation, {
-            color: 'red',    // Color del borde del círculo
-            fillColor: 'red', // Color de relleno
-            fillOpacity: 0.5,
-            radius: 500       // Radio del círculo en metros
-        }).addTo(map);
+        const icons = {
+            Hospital: L.icon({ iconUrl: 'medicamento.png', iconSize: [22, 22] }),
+            Emergencia: L.icon({ iconUrl: 'policia.png', iconSize: [22, 22] })
+        };
 
-        // Forzar la actualización del mapa al cargar
-        setTimeout(function() {
-            map.invalidateSize();
-        }, 100);
+        const markers = [
+            { coords: [-38.735, -72.612], type: 'Hospital', dataKey: 'AvAlemania' }
+        ];
+
+        markers.forEach(({ coords, type, dataKey }) => {
+            L.marker(coords, { icon: icons[type] })
+                .addTo(map)
+                .on('click', e => mostrarGrafico(dataKey, e.latlng));
+        });
+
+        function mostrarGrafico(tipo, latlng) {
+            const data = chartData[tipo];
+            const popupContent = `
+                <div class="chart-popup">
+                    <canvas id="chart-${tipo}" class="chart-container"></canvas>
+                </div>`;
+            
+            L.popup()
+                .setLatLng(latlng)
+                .setContent(popupContent)
+                .openOn(map);
+
+            setTimeout(() => {
+                const ctx = document.getElementById(`chart-${tipo}`).getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{ data: data.data }]
+                    }
+                });
+            }, 300);
+        }
     </script>
-
 </body>
-
 </html>
