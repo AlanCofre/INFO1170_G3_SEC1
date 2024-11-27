@@ -1,5 +1,5 @@
 <?php
-include '../Conex.php'; // Asegúrate de que este archivo contenga la conexión a la base de datos
+include '../includes/conex.php'; // Asegúrate de que este archivo contenga la conexión a la base de datos
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtener y sanitizar los datos enviados desde el formulario

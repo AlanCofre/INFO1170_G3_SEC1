@@ -288,73 +288,73 @@
                     }, 300);
                 }
                 // Ruta predefinida para el marcador en movimiento
-        const route = [
-            [-38.73965, -72.59842],
-            [-38.735, -72.612],
-            [-38.738, -72.615],
-            [-38.740, -72.618],
-            [-38.745, -72.620],
-            [-38.750, -72.625]
-        ];
-
-        // Crear el marcador en movimiento
-        let movingMarker = L.marker(route[0], {
-            icon: L.icon({
-                iconUrl: '../assets/pollata.png', // Cambia este ícono a uno que desees
-                iconSize: [32, 32],
-                iconAnchor: [16, 16]
-            })
-        }).addTo(map);
-
-        // Índice para recorrer la ruta
-        let smoothIndex = 0;
-        let step = 0.1; // Paso para interpolación (menor valor = más suave)
-
-        // Función para interpolar entre dos coordenadas
-        function interpolate(lat1, lng1, lat2, lng2, factor) {
-            return [
-                lat1 + (lat2 - lat1) * factor,
-                lng1 + (lng2 - lng1) * factor
-            ];
-        }
-
-        // Función para mover el marcador suavemente
-        function smoothMoveMarker() {
-            if (smoothIndex >= route.length - 1) {
-                smoothIndex = 0; // Reinicia el índice cuando termine la ruta
-            }
-
-            const current = route[smoothIndex];
-            const next = route[smoothIndex + 1];
-
-            // Calcula la nueva posición
-            const newPosition = interpolate(current[0], current[1], next[0], next[1], step);
-
-            // Actualiza la posición del marcador
-            movingMarker.setLatLng(newPosition);
-
-            // Incrementa el paso
-            step += 0.1;
-            if (step >= 1) {
-                step = 0;
-                smoothIndex++; // Avanza al siguiente punto de la ruta
-            }
-        }
-
-        // Mueve el marcador cada 100 ms
-        setInterval(smoothMoveMarker, 100);
-                // Evento para capturar y mostrar las coordenadas al hacer clic en el mapa
-                //map.on('click', e => {
-                  //  console.log(`Latitud: ${e.latlng.lat}, Longitud: ${e.latlng.lng}`);
-                    //L.popup()
-                        //.setLatLng(e.latlng)
-                        //.setContent(`Coordenadas: ${e.latlng.lat}, ${e.latlng.lng}`)
-                        //.openOn(map);
-                //});
-            </script>
+                const route = [
+                    [-38.73965, -72.59842],
+                    [-38.735, -72.612],
+                    [-38.738, -72.615],
+                    [-38.740, -72.618],
+                    [-38.745, -72.620],
+                    [-38.750, -72.625]
+                ];
+                    
+                // Crear el marcador en movimiento
+                let movingMarker = L.marker(route[0], {
+                    icon: L.icon({
+                        iconUrl: '../assets/pollata.png', // Cambia este ícono a uno que desees
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 16]
+                    })
+                }).addTo(map);
+            
+                // Índice para recorrer la ruta
+                let smoothIndex = 0;
+                let step = 0.1; // Paso para interpolación (menor valor = más suave)
+            
+                // Función para interpolar entre dos coordenadas
+                function interpolate(lat1, lng1, lat2, lng2, factor) {
+                    return [
+                        lat1 + (lat2 - lat1) * factor,
+                        lng1 + (lng2 - lng1) * factor
+                    ];
+                }
+            
+                // Función para mover el marcador suavemente
+                function smoothMoveMarker() {
+                    if (smoothIndex >= route.length - 1) {
+                        smoothIndex = 0; // Reinicia el índice cuando termine la ruta
+                    }
+                
+                    const current = route[smoothIndex];
+                    const next = route[smoothIndex + 1];
+                
+                    // Calcula la nueva posición
+                    const newPosition = interpolate(current[0], current[1], next[0], next[1], step);
+                
+                    // Actualiza la posición del marcador
+                    movingMarker.setLatLng(newPosition);
+                
+                    // Incrementa el paso
+                    step += 0.1;
+                    if (step >= 1) {
+                        step = 0;
+                        smoothIndex++; // Avanza al siguiente punto de la ruta
+                    }
+                }
+            
+                // Mueve el marcador cada 100 ms
+                setInterval(smoothMoveMarker, 100);
+                        // Evento para capturar y mostrar las coordenadas al hacer clic en el mapa
+                        //map.on('click', e => {
+                          //  console.log(`Latitud: ${e.latlng.lat}, Longitud: ${e.latlng.lng}`);
+                            //L.popup()
+                                //.setLatLng(e.latlng)
+                                //.setContent(`Coordenadas: ${e.latlng.lat}, ${e.latlng.lng}`)
+                                //.openOn(map);
+                        //});
+                    </script>
             
             
-        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
         </body>
         
         </html>

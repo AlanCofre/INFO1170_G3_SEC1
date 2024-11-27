@@ -1,5 +1,5 @@
 <?php
-include '../Conex.php';
+include '../includes/conex.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo_problema = htmlspecialchars($_POST['tipo_problema']);
@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             echo "Reporte guardado con éxito.";
+            header("Location: ../views/update_cliente.html");
         } else {
             echo "Error al guardar el reporte: " . $stmt->error;
         }
