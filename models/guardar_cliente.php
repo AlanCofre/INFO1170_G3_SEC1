@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             echo "Reporte guardado con éxito.";
-            header("Location: ../views/update_cliente.html");
         } else {
             echo "Error al guardar el reporte: " . $stmt->error;
         }
