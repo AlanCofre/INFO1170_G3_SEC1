@@ -1,0 +1,79 @@
+<!--COLOCAR MAPA Y SU FUNCION PARA LOCALIZAR SU UBICACION DEPENDIENDO DE LA DIRECCION EXACTA
+    ELIMINAR SU NAVBAR Y FOOTER PARA UTILIZAR LA PLNTILLA 
+    PHP PARA GUARDAR DATOS A LA TABLA "REPORTE" 
+    PROBAR QUE LA IMAGEN SE GUARDE A LA BASE DE DATOS
+    UNA VES ENVIADO SE DIRIGE A LA BANDEJA DE ADMIN Y SE TRASLADA A LA VISTA UPDATE-->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reporte de Incidencias</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <!-- NAVBAR -->
+    </header>
+
+    <main class="container mt-5">
+        <h1 class="text-center">Formulario de Reporte de Incidencias</h1>
+        <form id="form-reporte" action="../models/guardar_cliente.php" method="post" enctype="multipart/form-data">
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Descripción</legend>
+                <div class="form-group">
+                    <label for="tipo_problema">Tipo de Problema:</label>
+                    <select id="tipo_problema" name="tipo_problema" class="form-control">
+                        <option value="corte_total_energia">Corte total de energía</option>
+                        <option value="baja_tension">Baja tensión</option>
+                        <option value="oscilaciones_voltaje">Oscilaciones de voltaje</option>
+                        <option value="ruido_chispas">Ruido o chispas en la red eléctrica</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion_detallada">Descripción Detallada:</label>
+                    <textarea id="descripcion_detallada" name="descripcion_detallada" rows="4" cols="50"
+                        class="form-control" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha_hora_inicio">Fecha y Hora del Inicio del Problema:</label>
+                    <input type="datetime-local" id="fecha_hora_inicio" name="fecha_hora_inicio" class="form-control"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección Exacta:</label>
+                    <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Ingrese la dirección" required>
+                </div>
+            </fieldset>
+
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Adjunta evidencia</legend>
+                <div class="form-group">
+                    <label for="imagenes_videos">Subida de Imágenes o Videos:</label>
+                    <input type="file" id="imagenes_videos" name="imagenes_videos[]" multiple class="form-control-file">
+                </div>
+            </fieldset>
+
+            <!-- Botón con enlace que redirige directamente usando ruta relativa -->
+            <button type="submit" class="btn btn-primary">Enviar Reporte</button>
+        </form>
+    </main>
+
+    <footer class="text-center mt-5">
+        <p>© 2024 Luz Alerta. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="../assets/guardar_cliente.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

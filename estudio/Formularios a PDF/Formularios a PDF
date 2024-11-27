@@ -1,0 +1,39 @@
+Paso 1: Agregar la librería html2pdf.js al proyecto
+Primero, necesitas incluir la librería html2pdf.js en tu archivo HTML. Puedes hacerlo desde un CDN:
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+Paso 2: Modificar el botón de envío del formulario
+Cambia el botón de envío para que ejecute una función de JavaScript en lugar de un simple enlace:
+
+<button type="button" class="btn btn-primary" onclick="generarPDF()">
+    Enviar Reporte
+</button>
+
+
+Paso 3: Escribir la función de JavaScript para generar el PDF
+Agrega la función de JavaScript que tomará el formulario y lo convertirá en un PDF:
+
+<script>
+    function generarPDF() {
+        // Selecciona el elemento que deseas convertir a PDF
+        const formulario = document.getElementById('form-reporte');
+
+        // Configuración de opciones para html2pdf
+        const opciones = {
+            margin: 1,
+            filename: 'reporte_incidencia.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        // Generar el PDF
+        html2pdf().from(formulario).set(opciones).save();
+    }
+</script>
+
+
+Paso 4: Prueba y ajuste
+Abre el archivo HTML en tu navegador y verifica que el botón "Enviar Reporte" esté presente.
+Haz clic en el botón y espera a que el PDF se genere automáticamente y se descargue.
